@@ -41,6 +41,24 @@ Wo -> the width of the image (which is the same as Wi in almost all cases)
 NOTE: The output of torchvision models is an OrderedDict and not a torch.Tensor
 And in during inference (.eval() mode ) the output, which is an OrderedDict just has one key – out. This out key holds the output and it’s corresponding value has the shape of [No x Co x Ho x Wo].
 
+
+
+The Semantic Segmentation network provided by this paper learns to combine coarse, high layer informaiton with fine, low layer information. The pooling and prediction layers are shown as grid that reveal relative spatial coarseness, while intermediate layers are shown as vertical lines
+
+The encoder
+VGG16 model pretrained on ImageNet for classification (see VGG16 architecutre below) is used in encoder.
+And the fully-connected layers are replaced by 1-by-1 convolutions.
+The decoder
+Transposed convolution is used to upsample the input to the original image size.
+Two skip connections are used in the model.
+
+![](asset/fcn_general.jpg)
+
+![](asset/fcn.jpg)
+
+![](asset/vgg16.png)
+
+
 # Manipulate-COCO-dataset
 Explore COCO dataset and manipulate elements in the context of semantic segmentation
 
