@@ -15,13 +15,14 @@ The most common use cases for the Semantic Segmentation are:
 
 In this project, we label the pixels of a road in images using a Fully Convolutional Network (FCN). The principle of FCNs is to remove all fully-connected layers to preserve spacial information and obtain a classification of each pixel or the original image as an output.
 
-![](asset/fcn_general.jpg)
-
 I use the Semantic Segmentation network built and adapted after the following [paper](https://arxiv.org/abs/1411.4038) 2015, Jonathan Long et al. The FCN introduced by the authors learns to combine coarse, high layer information with fine, low layer information, nobably by using "skip connections". 
 
 The FCN model architecture comprises :
 - an encoder, usually a pre-trained proven network whith all dense, fully_connected, classification section removed. As such the encoder acts as a feature extraction with only convolutional layers keeping the spacial information. The obtained feature volume is passed thru a 1x1 final convolutional layer to obtain a grid. I used VGG16.
 - a decoder which will upsample the extracted spacial information back to the original image size using transpose convolutional layers also preserving the spacial information. The output is a grid of size identical to the original image and depth equals to the number of classes. Each pixel is therefore associated to a probability vector.
+
+![](asset/fcn_general.jpg)
+
 - skip connections are intermediate outputs from the encoder fed directly into the decoder at various stages. In the paper "Fully Convolutional Networks for Semantic Segmentation", the authors used a pre-trained VGG16 for the encoder and extracted the output of maxpooling layers 3 and 4 (output of layer blocks 3 and 4) to fed into the decoder along the upsampling process. The output of layer 7 (final maxpooling layer) is pushed through a 1x1 convolutional layer and fed as input to the decoder (commonly refered as the third skip connection).
 
 The principles are summarized in the below sketch: The pooling and prediction layers are shown as grid that reveal relative spatial coarseness, while intermediate layers are shown as vertical lines.
