@@ -62,5 +62,5 @@ The model is trained in Pytorch using [KITTI Road dataset](http://www.cvlibs.net
 
 ## Results
 
-![](sample.PNG)
+![](asset/sample.PNG)
 
