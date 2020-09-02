@@ -1,4 +1,4 @@
-# FCN-Semantic-Segmentation-using-Pytorch-Kitti-Road-dataset
+# FCN-Semantic-Segmentation-using-Pytorch-on-Kitti-Road-dataset
 
 
 # Introduction
