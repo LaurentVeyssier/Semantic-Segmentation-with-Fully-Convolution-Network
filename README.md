@@ -25,7 +25,7 @@ The FCN model architecture comprises :
 
 - skip connections are intermediate outputs from the encoder fed directly into the decoder at various stages. In the paper "Fully Convolutional Networks for Semantic Segmentation", the authors used a pre-trained VGG16 for the encoder and extracted the output of maxpooling layers 3 and 4 (output of layer blocks 3 and 4) to fed into the decoder along the upsampling process. The output of layer 7 (final maxpooling layer) is pushed through a 1x1 convolutional layer and fed as input to the decoder (commonly refered as the third skip connection).
 
-The principles are summarized in the below sketch: The pooling and prediction layers are shown as grid that reveal relative spatial coarseness, while intermediate layers are shown as vertical lines.
+The principles are summarized in the below sketch: The pooling and prediction layers are shown as grid that reveal relative spatial coarseness, while intermediate layers are shown as vertical lines. The VGG network portion is the horizontal part while the vertical section are fed into the decoder.
 
 ![](asset/fcn.jpg)
 
