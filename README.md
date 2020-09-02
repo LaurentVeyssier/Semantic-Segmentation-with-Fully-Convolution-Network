@@ -29,6 +29,8 @@ The principles are summarized in the below sketch: The pooling and prediction la
 
 ![](asset/fcn.jpg)
 
+As a result the author describes FCN-8 where the input is upsampled 8 times back to the original dimensions, FCN-16 and FCN-32 (the output of the encoder passed through the 1x1 convolution is upsampled 32 times back to the original dimensions). This refers to the combination of a range of information, from coarse to finer details, mentionned earlier.
+
 My model :
 - The encoder: VGG16 model pretrained on ImageNet for classification (see VGG16 architecutre below). The fully-connected layers are replaced by 1-by-1 convolution.
 
