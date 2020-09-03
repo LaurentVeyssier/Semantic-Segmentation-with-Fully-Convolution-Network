@@ -13,7 +13,7 @@ The most common use cases for the Semantic Segmentation are:
 
 # Project description
 
-In this project, we label the pixels of a road in images using a Fully Convolutional Network (FCN). The principle of FCNs is to remove all fully-connected layers to preserve spatial information and obtain a classification of each pixel or the original image as an output.
+In this project, we label the pixels of a road in images using a Fully Convolutional Network (FCN). The principle of FCNs is to remove all fully-connected layers to preserve spatial information and obtain a classification at pixel-level, ie for each pixel of the original image.
 
 I use the Semantic Segmentation network built and adapted after the following [paper](https://arxiv.org/abs/1411.4038) 2015, Jonathan Long et al. The FCN introduced by the authors learns to combine coarse, high layer information with fine, low layer information, nobably by using "skip connections". 
 
