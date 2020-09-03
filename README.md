@@ -29,7 +29,7 @@ This architecture's principles are summarized in the sketch below: In the sletch
 
 ![](asset/fcn.jpg)
 
-On that basis, the authors refer to FCN-8, FCN-16 and FCN-32. The 32 indicates that in the pipeline it performs five max-pooling to reduce the size of image by 1/32. FCN-32 corresponds to all five maxpooling layers of the VGG16 network, FCN-16 only the first four and FCN-8 only the first three. Skip connections inject the output of each of these during the upsampling process. FCN-8 is upsampled 8 times back to the original dimensions while FCN-32 (the output of the VGG encoder) is upsampled 32 times back to the original dimensions by the decoder. This illustrates the combination of a range of information, from coarse to finer details, mentionned earlier. FCN-32 architecture is very efficient to process but can result in losing fine-grained features.
+On that basis, the authors refer to FCN-8, FCN-16 and FCN-32. The 32 indicates that in the pipeline it performs five max-pooling to reduce the size of image by 1/32. FCN-32 corresponds to all five maxpooling layers of the VGG16 network, FCN-16 only the first four and FCN-8 only the first three. Skip connections inject the output of each of these during the upsampling process. FCN-8 is upsampled 8 times back to the original dimensions while FCN-32 (the output of the VGG encoder) is upsampled by the decoder 32 times back to the original dimensions. This illustrates the combination of a range of information, from coarse to finer details, mentionned earlier. FCN-32 architecture is very efficient to process but can result in losing fine-grained features.
 
 # Model architecture
 
