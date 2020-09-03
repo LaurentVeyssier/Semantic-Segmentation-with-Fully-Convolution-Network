@@ -13,7 +13,7 @@ The most common use cases for the Semantic Segmentation are:
 
 # Project description
 
-In this project, we label the pixels of a road in images using a Fully Convolutional Network (FCN). The principle of FCNs is to remove all fully-connected layers to preserve spatial information and obtain a classification at pixel-level, ie for each pixel of the original image.
+In this project, we label the pixels of a road in images using a Fully Convolutional Network (FCN). FCN models differ from traditional model because it excludes any fully-connected layer and instead rely completely on convolution and transposed operation. Removing all fully-connected layers aims to preserve spatial information and obtain a pixel-wise prediction, ie a classification of each pixel from the original image.
 
 I use a Semantic Segmentation FCN network adapted from the following [paper](https://arxiv.org/abs/1411.4038) 2015, Jonathan Long et al. The FCN introduced by the authors learns to combine coarse, high layer information with fine, low layer information, nobably by using "skip connections". 
 
@@ -29,7 +29,7 @@ This architecture's principles are summarized in the sketch below: In the sletch
 
 ![](asset/fcn.jpg)
 
-On that basis, the authors refer to FCN-8, where the input is upsampled 8 times back to the original dimensions, FCN-16 and FCN-32 (the output of the encoder passed through the 1x1 convolution is upsampled 32 times back to the original dimensions). This illustrates the combination of a range of information, from coarse to finer details, mentionned earlier.
+On that basis, the authors refer to FCN-8, FCN-16 and FCN-32. The 32 indicates that in the pipeline it performs five max-pooling to reduce the size of image by 1/32. FCN-32 corresponds to all five maxpooling layers of the VGG16 network, FCN-16 only the first four and FCN-8 only the first three. Skip connections inject the output of each of these during the upsampling process. FCN-8 is upsampled 8 times back to the original dimensions while FCN-32 (the output of the VGG encoder) is upsampled 32 times back to the original dimensions by the decoder. This illustrates the combination of a range of information, from coarse to finer details, mentionned earlier. FCN-32 architecture is very efficient to process but can result in losing fine-grained features.
 
 # Model architecture
 
