@@ -17,15 +17,15 @@ In this project, we label the pixels of a road in images using a Fully Convoluti
 
 I use a Semantic Segmentation FCN network adapted from the following [paper](https://arxiv.org/abs/1411.4038) 2015, Jonathan Long et al. The FCN introduced by the authors learns to combine coarse, high layer information with fine, low layer information, nobably by using "skip connections". 
 
-The FCN model architecture comprises :
-- an encoder, usually a pre-trained proven network whith all dense, fully_connected, classification section removed. As such the encoder acts as a feature extraction with only convolutional layers keeping the spatial information. The obtained feature volume is passed thru a 1x1 convolutional layer before entering the decoder. I used VGG16.
-- a decoder which upsamples the extracted information back to the original image size using transpose convolutional layers to preserve the spatial information from convolutions only. The output is a "grid" volume of size identical to the original image and depth equals to the number of classes. Each pixel is therefore associated to a probability vector.
+A FCN model architecture comprises :
+- an encoder, usually a pre-trained proven network with the dense, fully-connected, classification section removed. As such the encoder acts as a feature extractor using convolutional layers only, and preserving spatial information (which is lost using dense layers). The obtained feature volume is passed through a 1x1 convolutional layer before entering the decoder.
+- a decoder which upsamples the extracted information back to the original image size. This can be achieved using transpose convolutional layers which preserve spatial information as well. The output is a "grid" volume of size identical to the original image and of depth equals to the number of classes. Each pixel is therefore associated with a probability vector which allows to predict its class.
 
 ![](asset/fcn_general.jpg)
 
-- skip connections are intermediate outputs of the encoder fed directly into the decoder at various stages. In the paper "Fully Convolutional Networks for Semantic Segmentation", the authors used a pre-trained VGG16 for the encoder and extracted the outputs of the maxpooling layers 3 and 4 (output of layer blocks 3 and 4) to feed the decoder along the upsampling process. The output of layer 7 (last VGG maxpooling layer) is pushed through a 1x1 convolutional layer and fed as input to the decoder (layer 7 is often refered as the third skip connection).
+- skip connections are intermediate outputs of the encoder fed directly into the decoder at various stages in the upsampling process. In the paper "Fully Convolutional Networks for Semantic Segmentation", the authors used a pre-trained VGG16 for the encoder and extracted the outputs of maxpooling layers n°3 and n°4 (output of layer blocks 3 and 4) to feed the decoder along the upsampling process. The output of layer 7 (last maxpooling layer in VGG network) is pushed through a 1x1 convolutional layer and fed as input to the decoder (layer 7 is often refered as the third skip connection).
 
-The principles are summarized in the sketch below: The pooling and prediction layers are shown as grid that reveal relative spatial coarseness, while intermediate layers are shown as vertical lines. The VGG network portion is the horizontal part while the vertical section indicated the skip connections fed into the decoder.
+This architecture's principles are summarized in the sketch below: In the sletch, the pooling and prediction layers are shown as grid that reveal relative spatial coarseness, while intermediate layers are shown as vertical lines. The VGG network portion is the horizontal part while the vertical section indicated the skip connections fed into the decoder.
 
 ![](asset/fcn.jpg)
 
@@ -34,11 +34,11 @@ On that basis, the authors refer to FCN-8, where the input is upsampled 8 times 
 # Model architecture
 
 My model :
-- The encoder: VGG16 model pretrained on ImageNet for classification (see VGG16 architecutre below). The fully-connected layers are replaced by 1-by-1 convolution.
+- The encoder: VGG16 model pretrained on ImageNet for classification (see VGG16 architecture below). The fully-connected layers are replaced by 1-by-1 convolutions.
 
 ![](asset/vgg16.png)
 
-- The decoder: Transposed convolution is used to upsample the input to the original image size. Skip connections from the encoder to the decoder are used in the model. BatchNorm used on the skip connection addition step and ReLu used on the outputs of the transpose convolutions.
+- The decoder: Transposed convolutions are used to upsample the input back to the original image size. Skip connections bridging the encoder to the decoder are used in the model. BatchNorm is used on the skip connection addition step while ReLu is applied to the outputs of the transpose convolutions.
 
 Pretrained models expect a 3-channel image (RGB) which is normalized with the Imagenet mean and standard deviation, i.e., mean = [0.485, 0.456, 0.406], std = [0.229, 0.224, 0.225]. The input dimension is [N x C x H x W] where,
 
