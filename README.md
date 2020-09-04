@@ -1,6 +1,10 @@
 # FCN-Semantic-Segmentation-using-Pytorch-on-Kitti-Road-dataset
 
 
+![](data/GIF2.gif)
+
+
+
 # Introduction
 
 Semantic Segmentation is an image analysis task in which we classify each pixel in the image into a class. This is similar to what humans do whenever we are looking at something, we try to categorize what portion of the image belongs to which class/label. Humans would categorize larger shapes belonging to one class immediately without looking further at the details, but would look at it more closely in case the classification is not immediate. This approach mixes a global appreciation and a finer examination. This is what FCN models can do as well in the architecture described below.
@@ -72,3 +76,6 @@ I used batches of 32, BCELoss and Adam optimizer (lr=0.01). Best convergence res
 
 ![](asset/sample.PNG)
 
+![](data/GIF3.gif)
+
+![](data/GIF1.gif)
