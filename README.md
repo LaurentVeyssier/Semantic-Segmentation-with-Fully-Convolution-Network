@@ -1,7 +1,7 @@
 # FCN-Semantic-Segmentation-using-Pytorch-on-Kitti-Road-dataset
 
 
-![](data/GIF2.gif)
+![](asset/GIF2.gif)
 
 
 
@@ -76,6 +76,4 @@ I used batches of 32, BCELoss and Adam optimizer (lr=0.01). Best convergence res
 
 ![](asset/sample.PNG)
 
-![](data/GIF3.gif)
-
-![](data/GIF1.gif)
+![](asset/GIF3.gif)                                                                                                         ![](asset/GIF1.gif)
