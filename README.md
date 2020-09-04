@@ -72,7 +72,9 @@ The model is trained in Pytorch using [KITTI Road dataset](http://www.cvlibs.net
 
 ## Results
 
-I used batches of 32, BCELoss and Adam optimizer (lr=0.01). Best convergence results were achieved applying scaling factors to the two skip connections during the injection - addition step (x 0.01 for FCN-16 and x 0.0001 for FCN-8). The model has difficulties with shadow areas.
+I used batches of 32, BCELoss and Adam optimizer (lr=0.01). The model has difficulties with shadow areas, crossroads and objects. The limited size of the training set can explain part of the shortcomings.
+
+Next : Try improving convergence and results applying scaling factors to the two skip connections during the injection/addition step (for example x 0.01 for FCN-16 and x 0.001 for FCN-8).
 
 ![](asset/sample.PNG)
 
