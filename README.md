@@ -46,7 +46,9 @@ My model :
 
 ![](asset/vgg16.png)
 
-- The decoder: Transposed convolutions are used to upsample the input back to the original image size. Total upsampling is x32 using 5 deconvolution layers. Skip connections bridging the encoder to the decoder are used in the model. BatchNorm is used on the skip connection addition step while BatchNorm and ReLu is applied to the outputs of the transpose convolutions. The final layer is a AdaptiveMaxPooling3d (AMP) layer allowing to reduce the feature map from 16 to the number of classes which is 2, without changing the X-Y dimensions. This last layer acts as the classifier. AMP are convenient to perform final classification. 
+- The decoder: Transposed convolutions are used to upsample the input back to the original image size. Total upsampling is x32 using 5 deconvolution layers. Skip connections bridging the encoder to the decoder are used in the model. BatchNorm is used on the skip connection addition step while BatchNorm and ReLu is applied to the outputs of the transpose convolutions. The final layer is a AdaptiveMaxPooling3d (AMP) layer allowing to reduce the feature map from 16 to the number of classes which is 2, without changing the X-Y dimensions. This last layer acts as the classifier. AMP are convenient to perform final classification.
+
+Overall the model has 864.000 learning parameters related to the decoder.
 
 Pretrained models expect a 3-channel image (RGB) which is normalized with the Imagenet mean and standard deviation, i.e., mean = [0.485, 0.456, 0.406], std = [0.229, 0.224, 0.225]. The input dimension is [N x C x H x W] where,
 
