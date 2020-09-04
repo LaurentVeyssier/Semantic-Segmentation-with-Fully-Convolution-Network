@@ -25,7 +25,7 @@ A FCN model architecture comprises :
 
 In variant architecture, the decoder can simply be one transpose convolutional layer upsampling the feature volume coming out of the encoder directly to the size of the original image with a depth equals to the number of classes. This one single step acts as a pixel-wise classifier where the array on each pixel represents a likelihood distribution that the pixel belongs to each class. More information can be found in this paper [Street View Segmentation using FCN models](http://cs231n.stanford.edu/reports/2017/pdfs/633.pdf).
 
-![](asset/simpleFCN.jpg)
+![](asset/simpleFCN.PNG)
 
 - skip connections are intermediate outputs of the encoder fed directly into the decoder at various stages in the upsampling process. In the paper "Fully Convolutional Networks for Semantic Segmentation", the authors used a pre-trained VGG16 for the encoder and extracted the outputs of maxpooling layers n°3 and n°4 (output of layer blocks 3 and 4) to feed the decoder along the upsampling process. The output of layer 7 (last maxpooling layer in VGG network) is pushed through a 1x1 convolutional layer and fed as input to the decoder.
 
