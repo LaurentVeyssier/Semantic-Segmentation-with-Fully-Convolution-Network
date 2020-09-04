@@ -15,17 +15,21 @@ The most common use cases for the Semantic Segmentation are:
 
 In this project, we label the pixels of a road in images using a Fully Convolutional Network (FCN). FCN models differ from traditional model because it excludes any fully-connected layer and instead rely completely on convolution and transposed operation. Removing all fully-connected layers aims to preserve spatial information and obtain a pixel-wise prediction, ie a classification of each pixel from the original image.
 
+![](asset/fcn_general.jpg)
+
 I use a Semantic Segmentation FCN network adapted from the following [paper](https://arxiv.org/abs/1411.4038) 2015, Jonathan Long et al. The FCN introduced by the authors learns to combine coarse, high layer information with fine, low layer information, nobably by using "skip connections". 
 
 A FCN model architecture comprises :
-- an encoder, usually a pre-trained proven network with the dense, fully-connected, classification section removed. As such the encoder acts as a feature extractor using convolutional layers only, and preserving spatial information (which is lost using dense layers). The obtained feature volume is passed through a 1x1 convolutional layer before entering the decoder.
-- a decoder which upsamples the extracted information back to the original image size. This can be achieved using transpose convolutional layers which preserve spatial information as well. The output is a "grid" volume of size identical to the original image and of depth equals to the number of classes. Each pixel is therefore associated with a probability vector which allows to predict its class.
+- an encoder, usually a pre-trained proven network with the dense, fully-connected, classification section removed. As such the encoder acts as a feature extractor using convolutional layers only, and preserving spatial information (which is lost using dense layers). The obtained features are passed through a decoder. It is common to use a 1x1 conv layer in-between to adjust the feature volume depth.
+- a decoder which upsamples the extracted information back to the original image size. This can be achieved using transpose convolutional layers preserving spatial information as well. The output is a "grid" volume of size identical to the original image and of depth equals to the number of classes. Each pixel is therefore associated with a probability vector which allows to predict its class. 
 
-![](asset/fcn_general.jpg)
+In variant architecture, the decoder can simply be one transpose convolutional layer upsampling the feature volume coming out of the encoder directly to the size of the original image with a depth equals to the number of classes. This one single step acts as a pixel-wise classifier where the array on each pixel represents a likelihood distribution that the pixel belongs to each class. More information can be found in this paper [Street View Segmentation using FCN models](http://cs231n.stanford.edu/reports/2017/pdfs/633.pdf).
 
-- skip connections are intermediate outputs of the encoder fed directly into the decoder at various stages in the upsampling process. In the paper "Fully Convolutional Networks for Semantic Segmentation", the authors used a pre-trained VGG16 for the encoder and extracted the outputs of maxpooling layers n°3 and n°4 (output of layer blocks 3 and 4) to feed the decoder along the upsampling process. The output of layer 7 (last maxpooling layer in VGG network) is pushed through a 1x1 convolutional layer and fed as input to the decoder (layer 7 is often refered as the third skip connection).
+![](asset/simpleFCN.jpg)
 
-This architecture's principles are summarized in the sketch below: In the sletch, the pooling and prediction layers are shown as grid that reveal relative spatial coarseness, while intermediate layers are shown as vertical lines. The VGG network portion is the horizontal part while the vertical section indicated the skip connections fed into the decoder.
+- skip connections are intermediate outputs of the encoder fed directly into the decoder at various stages in the upsampling process. In the paper "Fully Convolutional Networks for Semantic Segmentation", the authors used a pre-trained VGG16 for the encoder and extracted the outputs of maxpooling layers n°3 and n°4 (output of layer blocks 3 and 4) to feed the decoder along the upsampling process. The output of layer 7 (last maxpooling layer in VGG network) is pushed through a 1x1 convolutional layer and fed as input to the decoder.
+
+This architecture's principles are summarized in the sketch below: The pooling and prediction layers are shown as grid that reveal relative spatial coarseness, while intermediate layers are shown as vertical lines. The VGG network portion is the horizontal part while the vertical section indicated the skip connections fed into the decoder.
 
 ![](asset/fcn.jpg)
 
