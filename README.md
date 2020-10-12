@@ -1,5 +1,5 @@
 # FCN-Semantic-Segmentation-using-Pytorch-on-Kitti-Road-dataset
-
+Use deep learning model to produce a pixel-by-pixel classification of images and identify road for autonomous driving vehicles
 
 ![](asset/GIF2.gif)
 
